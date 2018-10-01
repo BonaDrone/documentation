@@ -31,3 +31,11 @@ Make sure you have first uploaded the `ESP32_flash_loader.ino` under the `extras
 * Partition Scheme: Default
 * Core Debug Level: None
 * PSRAM: Disabled
+
+## IMU biases
+```C
+// Biases
+float ACCEL_BIAS[3] = {0.003470, -0.000418, 0.039145};
+float GYRO_BIAS[3]  = {0.896399, -1.366036, -2.004719}; 
+```
+
