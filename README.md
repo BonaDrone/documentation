@@ -13,11 +13,11 @@ Each time the `messages.json` file is modified the following commands should be 
 ## Control loop
 
 ### Current
-![alt text](https://raw.githubusercontent.com/BonaDrone/documentation/blob/master/extras/PID-Loop-Original.png)
+![Current control loop](extras/PID-Loop-Original.png)
 
 ### Proposed
 It is yet to be accepted
-![alt text](https://raw.githubusercontent.com/BonaDrone/documentation/blob/master/extras/PID-modified.png)
+![Proposed Control loop](extras/PID-modified.png)
 
 ## ESP32 
 
