@@ -13,11 +13,10 @@ Each time the `messages.json` file is modified the following commands should be 
 ## Control loop
 
 ### Current
-![Current control loop](extras/PID-Loop-Original.png)
+![Current control loop](extras/PID-modified.png)
 
-### Proposed
-It is yet to be accepted
-![Proposed Control loop](extras/PID-modified.png)
+### Old
+![Proposed Control loop](extras/PID-Loop-Original.png)
 
 ## ESP32 
 
