@@ -12,11 +12,16 @@ Each time the `messages.json` file is modified the following commands should be 
 
 ## Control loop
 
+### Proposed
+![Proposed Rate PID](extras/rate-pid.png)
+
+![Proposed Level PID](extras/level-pid.png)
+
 ### Current
 ![Current control loop](extras/PID-modified.png)
 
-### Old
-![Proposed Control loop](extras/PID-Loop-Original.png)
+### Original
+![Original Control loop](extras/PID-Loop-Original.png)
 
 ## ESP32 
 
