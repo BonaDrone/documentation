@@ -13,8 +13,10 @@ Each time the `messages.json` file is modified the following commands should be 
 ## Control loop
 
 ### Proposed
+**Rate PID**
 ![Proposed Rate PID](extras/rate-pid.png)
 
+**Level PID**
 ![Proposed Level PID](extras/level-pid.png)
 
 ### Current
