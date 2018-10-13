@@ -47,3 +47,10 @@ float ACCEL_BIAS[3] = {0.003470, -0.000418, 0.039145};
 float GYRO_BIAS[3]  = {0.896399, -1.366036, -2.004719}; 
 ```
 
+## Juan transmitter trims
+```C
+// Trim receiver via software
+rc.setTrimRoll(-0.0012494f);
+rc.setTrimPitch(-0.0058769f);
+rc.setTrimYaw(-0.0192190f);
+```
