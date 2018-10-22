@@ -50,8 +50,8 @@ Make sure you have first uploaded the `ESP32_flash_loader.ino` under the `extras
 ## IMU biases
 ```C
 // Biases
-float ACCEL_BIAS[3] = {0.003470, -0.000418, 0.039145};
-float GYRO_BIAS[3]  = {0.896399, -1.366036, -2.004719}; 
+float ACCEL_BIAS[3] = {-0.016238,-0.009853,0.032948};
+float GYRO_BIAS[3]  = {0.910652,-1.543902,-2.956785};
 ```
 
 ## Juan transmitter trims
