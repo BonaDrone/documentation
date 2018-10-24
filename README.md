@@ -29,6 +29,8 @@ Each time the `messages.json` file is modified the following commands should be 
 
 ### Requirements
 
+Follow the [official instructions](https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md) to get the ESP32 drivers on your Arduino IDE.
+
 Make sure you have first uploaded the `ESP32_flash_loader.ino` under the `extras` folder into the board.
 
 ### Start ESP32 in boot mode
