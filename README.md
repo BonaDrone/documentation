@@ -14,13 +14,17 @@ Each time the `messages.json` file is modified the following commands should be 
 
 ### Current
 **Rate PID**
-![Proposed Rate PID](extras/rate-pid.png)
+![Rate PID](extras/rate-pid.png)
 
 **Level PID**
-![Proposed Level PID](extras/level-pid.png)
+![Level PID](extras/level-pid.png)
+
+**AltHold PID**
+![AltHold PID](extras/althold-pid.png)
+Based on [iNav's AltHold PID](https://github.com/iNavFlight/inav/wiki/Developer-info)
 
 ### Old
-![Current control loop](extras/PID-modified.png)
+![Old control loop](extras/PID-modified.png)
 
 ### Original
 ![Original Control loop](extras/PID-Loop-Original.png)
