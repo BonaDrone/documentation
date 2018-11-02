@@ -1,6 +1,8 @@
 # Documentation
 Different bits of documentation to ease BonaDrone's developers life
 
+## Battery Check
+For BonaDrone's FC, the battery check can be performed by reading the value of the ESP32's pin 33.
 
 ## Autogenerate MSP commands Hackflight
 Each time the `messages.json` file is modified the following commands should be executed for the changes to take effect:
