@@ -74,3 +74,10 @@ rc.setTrimRoll(-0.0012494f);
 rc.setTrimPitch(-0.0058769f);
 rc.setTrimYaw(-0.0192190f);
 ```
+
+**15-11-2018**
+```C
+rc.setTrimRoll(-0.0030506f);
+rc.setTrimPitch(-0.0372178f);
+rc.setTrimYaw(-0.0384381f);
+```
