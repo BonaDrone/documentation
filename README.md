@@ -61,6 +61,11 @@ Make sure you have first uploaded the `ESP32_flash_loader.ino` under the `extras
 float ACCEL_BIAS[3] = {-0.016238,-0.009853,0.032948};
 float GYRO_BIAS[3]  = {0.910652,-1.543902,-2.956785};
 ```
+**15-11-2018**
+```C
+Gyro biases (x, y, z): 0.837052,-1.535432,-3.138039,
+Accel biases (x, y, z): -0.014827,-0.000640,0.036611,
+```
 
 ## Juan transmitter trims
 ```C
