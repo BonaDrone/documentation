@@ -11,6 +11,7 @@ Each time the `messages.json` file is modified the following commands should be 
 * `$ cd output/python/`
 * `$ sudo python3 setup.py install`
 
+When adding a new MSP message to `messages.json` it should be taken into account that, due to the current implementation of [msppg.py](https://github.com/BonaDrone/Hackflight/blob/master/extras/parser/msppg.py), messages with ID codes lower than 200 are used to request data from Hackflight whereas messages with ID code equal or higher than 200 are used to receive data.  
 
 ## Control loop
 
