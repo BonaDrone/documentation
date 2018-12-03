@@ -41,7 +41,7 @@ Follow the [official instructions](https://github.com/espressif/arduino-esp32/bl
 Make sure you have first uploaded the `ESP32_flash_loader.ino` under the `extras` folder into the board.
 
 ### Start ESP32 in boot mode
-**Note**: The [ESP flas loader](https://github.com/BonaDrone/ESP32-Sketchs/blob/master/extras/ESP32_flash_loader/ESP32_flash_loader.ino) code does already force the ESP32 to enter boot mode, so the following 3 steps are not longer required.
+**Note**: The [ESP flash loader](https://github.com/BonaDrone/ESP32-Sketchs/blob/master/extras/ESP32_flash_loader/ESP32_flash_loader.ino) code does already force the ESP32 to enter boot mode, so the following 3 steps are not longer required.
 
 * Remove power from board
 * Connect ESP32 GPIO 0 pin to ground
