@@ -103,3 +103,6 @@ Based on [iNav's AltHold PID](https://github.com/iNavFlight/inav/wiki/Developer-
 
 ### Original
 ![Original Control loop](extras/PID-Loop-Original.png)
+
+## Hackflight Architecture
+![ARchitecture](extras/hackflight_arch.png)
