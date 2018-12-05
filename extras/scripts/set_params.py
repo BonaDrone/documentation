@@ -13,8 +13,8 @@ BAUDRATE    = 9600
 # Command line arguments
 parser = argparse.ArgumentParser(description='Mosquito parameter set via MSP')
 
-parser.add_argument('-m','--mosquito', type=int, action='store', help="Mosquito version (1->90, 0->150)", default=0)
-parser.add_argument('-p','--position', type=int, action='store', help="Positioning board present (1/0)", default=0)
+parser.add_argument('-m','--mosquito', type=int, action='store', help="Mosquito version (1->90, 0->150)")
+parser.add_argument('-p','--position', type=int, action='store', help="Positioning board present (1/0)")
 parser.add_argument('-c','--constants', type=tuple, action='store', help="Rate PID constants", default=(0.06, 0.01, 0.00, 0.06, 0.01, 5.00))
 
 args = parser.parse_args()
@@ -44,8 +44,10 @@ def set_rate_pid(constants, serial_com, print_data = True):
 def main(pos_board_param, mosquito_version_param, constants_param):
 	# Serial communication object
 	serial_com = serial.Serial(PORT, BAUDRATE)
-	set_positioning_board(pos_board_param, serial_com)
-	set_mosquito_version(mosquito_version_param, serial_com)
+	if pos_board_param is not None:
+		set_positioning_board(pos_board_param, serial_com)
+	if mosquito_version_param is not None:
+		set_mosquito_version(mosquito_version_param, serial_com)
 	set_rate_pid(constants_param, serial_com)
 
 
