@@ -18,6 +18,10 @@ The first 100 EEPROM slots are reserved for storing Mosquito parameters. The ful
 |  21-24  |  demandsToRate  |                                  -                                  | Sets the demands to rate factor                                                                                                                                   | 224-PID_CONSTANTS: msg param 5                                                                                                                         |
 |  25-28  |      levelP     |                                  -                                  | Sets the Level P value for Roll and Pitch                                                                                                                         | 224-PID_CONSTANTS: msg param 6                                                                                                                         |
 
+The script [set_params](https://github.com/BonaDrone/documentation/blob/master/extras/scripts/set_params.py) under `/extras/scripts` can be used to change the parameters. Type:
+`$ python3 set_params.py -h`
+to see how to use it.
+
 ### EEPROM Mission storage
 
 When programming a mission, the navigation related data is stored in the EEPROM from address 100 until the end.
