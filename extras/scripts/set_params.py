@@ -1,4 +1,7 @@
 # Quick sketch that sets Mosquito parameters via MSP
+# Requires a system wide or local installation of msppg.py.
+#
+# See: https://github.com/BonaDrone/Hackflight/tree/master/extras/parser
 #
 # Author: Juan Gallostra
 # Date: 05-12-2018
