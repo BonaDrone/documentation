@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser(description='Mosquito parameter set via MSP')
 parser.add_argument('-m','--mosquito', type=int, action='store', help="Mosquito version (1->90, 0->150)")
 parser.add_argument('-p','--position', type=int, action='store', help="Positioning board present (1/0)")
 parser.add_argument('-c','--constants', type=tuple, action='store', help="Tuple containing PID constants",
-	 default=(0.06, 0.01, 0.00, 0.06, 0.01, 8.00, 0.3, 0.18, 0.18, 0.02, 0.05, 0.00, -1.00, -1.00, -1.00, -1.00))
+	 default=(0.06, 0.01, 0.00, 0.06, 0.01, 5.00, 0.3, 0.18, 0.18, 0.02, 0.05, 0.00, -1.00, -1.00, -1.00, -1.00))
 
 args = parser.parse_args()
 
