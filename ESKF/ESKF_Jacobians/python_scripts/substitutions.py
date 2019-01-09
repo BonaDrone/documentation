@@ -14,9 +14,9 @@ SUBS = {
 	"wsx" : "_rates[0]",
 	"wsy" : "_rates[1]",
 	"wsz" : "_rates[2]",
-	"asx" : "_gs[0]", # to be defined
-	"asy" : "_gs[1]",
-	"asz" : "_gs[2]",
+	"asx" : "_accels[0]", # to be defined
+	"asy" : "_accels[1]",
+	"asz" : "_accels[2]",
 	"wbx" : "x[10]",
 	"wby" : "x[11]",
 	"wbz" : "x[12]",
