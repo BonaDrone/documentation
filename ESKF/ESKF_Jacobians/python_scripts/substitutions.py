@@ -7,6 +7,7 @@
 JACOBIAN = "Fx"
 
 SUBS = {
+	"dt" : "dt",
 	"qw" : "x[6]", # x[0-5] are positions and velocities
 	"qx" : "x[7]",
 	"qy" : "x[8]",

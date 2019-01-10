@@ -24,10 +24,11 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('-i','--input', type=str, action='store', help="input text file")
 parser.add_argument('-o','--output', type=str, action='store', help="output text file")
+parser.add_argument('-n','--name', type=str, action='store', help="jacobian name")
 
 args = parser.parse_args()
 
-def main(input_file, output_file):
+def main(input_file, output_file, jacobian_name = "Fx"):
 	content = None
 	rows = 0
 	cols = 0
@@ -50,15 +51,10 @@ def main(input_file, output_file):
 			mod_element = s.change_var_names(replaced_powers)
 			curr_row += [mod_element]
 		jacobian += [curr_row]
-	# build jacobian in Hackflight format (Adding I and multiplying by dt)
+	# build jacobian in Hackflight format
 	for i in range(rows):
 		for j in range(cols):
-			if jacobian[i][j] not in ["0", " 0", "0 "]:
-				jacobian[i][j] = "("+jacobian[i][j]+")*dt"
-			if i==j:
-				jacobian[i][j] = "Fx["+str(i*rows+j)+"] = 1 + "+jacobian[i][j]+";\n"
-			else:
-				jacobian[i][j] = "Fx["+str(i*rows+j)+"] = "+jacobian[i][j]+";\n"
+			jacobian[i][j] = jacobian_name+"["+str(i*rows+j)+"] = "+jacobian[i][j]+";\n"
 	# Write to a txt file:
 	with open(output_file, 'w') as file:
 		for j in range(cols):
@@ -67,4 +63,4 @@ def main(input_file, output_file):
 				file.write(jacobian[i][j])
 
 if __name__ == '__main__':
-	main(args.input, args.output)
+	main(args.input, args.output, args.name)
