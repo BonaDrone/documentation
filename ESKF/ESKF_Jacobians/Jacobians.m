@@ -77,7 +77,7 @@ A_dx = ...
 F_dx = eye(15) + A_dx*dt;
 
 
-%% h(x) - accel. acobian of h(x) w.r.t the quaternion
+%% h(x) - accel. Jacobian of h(x) w.r.t the quaternion
 
 R_t = transpose(fromqtoR(q));
 R_t_g = -R_t*gv;
