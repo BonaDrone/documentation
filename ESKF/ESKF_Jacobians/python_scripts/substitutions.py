@@ -18,12 +18,12 @@ SUBS = {
 	"asx" : "_accels[0]", # to be defined
 	"asy" : "_accels[1]",
 	"asz" : "_accels[2]",
-	"wbx" : "x[13]",
-	"wby" : "x[14]",
-	"wbz" : "x[15]",
-	"abx" : "x[10]",
-	"aby" : "x[11]",
-	"abz" : "x[12]",
+	"wbx" : "x[10]",
+	"wby" : "x[11]",
+	"wbz" : "x[12]",
+	"abx" : "",
+	"aby" : "",
+	"abz" : "",
 	"g": "",
 }
 
