@@ -1,4 +1,4 @@
-# Script to build Jacobians for BaonaDrone's ESKF implementation 
+# Script to build Jacobians for BonaDrone's ESKF implementation 
 #
 # Author: Juan Gallostra jgallostra<at>bonadrone.com
 # Date: 01-09-2018
@@ -9,12 +9,6 @@
 #  3. Update the Matlab <-> Hackflight relations in correspondences.py
 #  4. Run this script with the previous text file as input 
 #
-# Notation:
-#   1. State:  
-# 		- position: 	x[0], x[1], x[2]
-#   	- valocity: 	x[3], x[4], x[5]
-#   	- quaternion: 	x[6], x[7], x[8], x[9]
-#		- gyro bias:	x[10], x[11], x[12]
 
 import substitutions as s
 import argparse
