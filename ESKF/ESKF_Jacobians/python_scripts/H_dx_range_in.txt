@@ -1,0 +1,1 @@
+[ -1/(qw^2 - qx^2 - qy^2 + qz^2), 0, - (2*pz*qw*qx)/(qw^2 - qx^2 - qy^2 + qz^2)^2 - (2*pz*qy*qz)/(qw^2 - qx^2 - qy^2 + qz^2)^2, (2*pz*qx*qz)/(qw^2 - qx^2 - qy^2 + qz^2)^2 - (2*pz*qw*qy)/(qw^2 - qx^2 - qy^2 + qz^2)^2, 0, 0, 0, 0]

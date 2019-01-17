@@ -8,23 +8,25 @@ JACOBIAN = "Fx"
 
 SUBS = {
 	"dt" : "dt",
-	"qw" : "x[6]", # x[0-5] are positions and velocities
-	"qx" : "x[7]",
-	"qy" : "x[8]",
-	"qz" : "x[9]",
+	"qw" : "x[2]", # x[0-1] are positions and velocities
+	"qx" : "x[3]",
+	"qy" : "x[4]",
+	"qz" : "x[5]",
 	"wsx" : "_rates[0]",
 	"wsy" : "_rates[1]",
 	"wsz" : "_rates[2]",
 	"asx" : "_accels[0]", # to be defined
 	"asy" : "_accels[1]",
 	"asz" : "_accels[2]",
-	"wbx" : "x[10]",
-	"wby" : "x[11]",
-	"wbz" : "x[12]",
+	"wbx" : "x[6]",
+	"wby" : "x[7]",
+	"wbz" : "x[8]",
 	"abx" : "",
 	"aby" : "",
 	"abz" : "",
 	"g": "",
+	"pz": "x[0]",
+	"vz": "x[1]",
 }
 
 
