@@ -27,6 +27,9 @@ SUBS = {
 	"g": "",
 	"pz": "x[0]",
 	"vz": "x[1]",
+	"rx":"rx",
+	"ry":"ry",
+	"rz":"rz",
 }
 
 
@@ -61,7 +64,7 @@ def replace_powers(element):
 			possible_power = False
 			mod_element += element[power_start_idx:idx]+letter
 
-		if letter == POWER:
+		if letter == POWER and possible_power:
 			found_power = True
 			power_end_idx = idx
 
@@ -98,7 +101,7 @@ def change_var_names(element):
 
 	for idx, letter in enumerate(element):
 		# get literal
-		if letter not in NORMAL_CHARS+NUM_CHARS and not possible_var:
+		if letter not in NORMAL_CHARS+NUM_CHARS+[POWER] and not possible_var:
 			# hit literal
 			possible_var = True
 			var_start_idx = idx

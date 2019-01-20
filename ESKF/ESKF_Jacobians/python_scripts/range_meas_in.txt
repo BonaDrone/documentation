@@ -1,0 +1,1 @@
+[-(pz + rz*(qw^2 - qx^2 - qy^2 + qz^2) - rx*(2*qw*qy - 2*qx*qz) + ry*(2*qw*qx + 2*qy*qz))/(qw^2 - qx^2 - qy^2 + qz^2)]
