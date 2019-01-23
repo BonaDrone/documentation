@@ -64,7 +64,7 @@ Q = -0.5*Qmat(q);
 A_x = ...
     [0               1    zeros(1, 4)  zeros(1, 3); ...
      0               0      V(3,:)     zeros(1,3); ...
-    zeros(3,1)   zeros(3,1)    W             Q       ; ...
+    zeros(4,1)   zeros(4,1)    W             Q       ; ...
     zeros(3, 9)];
 
 F_x = eye(9) + A_x*dt;
@@ -97,11 +97,12 @@ H_dx_a = H_x*X_dx;
 
 %% h(x) - Range Finder
 
-R_r_i = [1 0 0; 0 -1 0; 0 0 -1];
-p_r_i = [rx ry rz]; % measure distances
+R_r_i = eye(3);
+p_r_i = [rx; ry; rz]; % measure distances
+%p_r_i = [0; 0; 0]; % measure distances
 R = fromqtoR(q);
 
-p_r_w = [0; 0; pz] + R*transpose(p_r_i);
+p_r_w = [0; 0; pz] + R*p_r_i;
 R_r_w = R*R_r_i;
 
 h_r = p_r_w(3)/R_r_w(3,3); 
