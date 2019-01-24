@@ -10,7 +10,6 @@ syms dvz
 syms dwx dwy dwz
 syms dwbx dwby dwbz
 
-
 syms g dt
 
 % Nominal states
@@ -43,31 +42,32 @@ ws = [wsx; wsy; wsz];
 % Aux vars
 syms rx ry rz
 
-%% Nominal Jacobian
+%% Integration model
+F_x = x;
+R = fromqtoR(q);
+aux    = R*as + [0;0;-g];
+q_aux  = [1;(ws-wb)*dt/2];
+F_x(1)   = pz + vz*dt;
+F_x(2)   = vz + aux(3)*dt;
+F_x(3:6) = leftQuaternion(q)*q_aux;
+F_x(7:9) = wb;
+
+%% Nominal Jacobian - No longer used
 
 %V = fromqtoR(q)*(as-ab);
-V = fromqtoR(q)*as;
-V = jacobian(V, q);
-R = -fromqtoR(q);
-W = 0.5*[0, -transpose(ws-wb); ws-wb, -skew(ws-wb)];
-Q = -0.5*Qmat(q);
-
-% gv = (as-ab);
-% 2*[qw*gv+cross(qv,gv), qv*transpose(gv)-gv*transpose(qv)+transpose(gv)*qv*eye(3)-qw*skew(gv)]
+%V = fromqtoR(q)*as;
+%V = jacobian(V, q);
+%R = -fromqtoR(q);
+%W = 0.5*[0, -transpose(ws-wb); ws-wb, -skew(ws-wb)];
+%Q = -0.5*Qmat(q);
 
 %A_x = ...
-%    [zeros(3) eye(3)   zeros(3, 4) zeros(3) zeros(3); ...
-%    zeros(3) zeros(3) V           -R        zeros(3); ...
-%    zeros(3) zeros(3) W           zeros(3) Q       ; ...
-%    zeros(6, 16)];
+%    [0               1    zeros(1, 4)  zeros(1, 3); ...
+%     0               0      V(3,:)     zeros(1,3); ...
+%    zeros(4,1)   zeros(4,1)    W             Q       ; ...
+%    zeros(3, 9)];
 
-A_x = ...
-    [0               1    zeros(1, 4)  zeros(1, 3); ...
-     0               0      V(3,:)     zeros(1,3); ...
-    zeros(4,1)   zeros(4,1)    W             Q       ; ...
-    zeros(3, 9)];
-
-F_x = eye(9) + A_x*dt;
+%F_x = eye(9) + A_x*dt;
 
 %% Error-State Jacobian
 
