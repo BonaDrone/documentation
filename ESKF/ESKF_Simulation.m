@@ -34,8 +34,8 @@ XX(:, 1)   = x;
 PP(:, :, 1) = P;
 
 % Sensor parameter
-noise_gyro      = 0.01;
-noise_gyro_bias = 0.001;
+noise_gyro      = 0.1;
+noise_gyro_bias = 0.0001;
 noise_accel     = 10;
 noise_accel_est = 0.1;
 noise_range     = 0.1;
@@ -54,36 +54,36 @@ for ii=1:size(imu_a, 2)
     w = imu_w(:, ii);
     
     % Nominal Jacobian
-    z = x(1);
+    pz = x(1);
     vz = x(2);
     qw = x(3);
     qv = x(4:6);
     wb = x(7:9);
     q = [qw; qv];
     
-    W = 0.5*[0, -transpose(w - wb); (w - wb), -skew(w - wb)];
-    Q = -0.5*Qmat(q);
-    V = 2*[qw*a + cross(qv, a), qv*a' - a*qv' + a'*qv*eye(3) - qw*skew(a)];
-    
-    A_x = ...
-        [0 1 zeros(1, N-2);...
-        0 0 V(3, :) zeros(1,3);...
-        zeros(4,2), W, Q; ...
-        zeros(3, N)];
-    
-    F_x = eye(size(A_x,1)) + A_x*dt;
-    
-    x = F_x*x;
+%     W = 0.5*[0, -transpose(w - wb); (w - wb), -skew(w - wb)];
+%     Q = -0.5*Qmat(q);
+%     V = 2*[qw*a + cross(qv, a), qv*a' - a*qv' + a'*qv*eye(3) - qw*skew(a)];
+%     
+%     A_x = ...
+%         [0 1 zeros(1, N-2);...
+%         0 0 V(3, :) zeros(1,3);...
+%         zeros(4,2), W, Q; ...
+%         zeros(3, N)];
+%     
+%     F_x = eye(size(A_x,1)) + A_x*dt;
+%     
+%     x = F_x*x;
     
     R = fromqtoR(q);
     aux    = R*a + [0;0;-gravity];
     q_aux  = [1;(w-wb)*dt/2];
-    x(1)   = z + vz*dt;
+    x(1)   = pz + vz*dt;
     x(2)   = vz + aux(3)*dt;
-    x(3:6) = leftQuaternion(q_aux)*q;
+    x(3:6) = leftQuaternion(q)*q_aux;
     x(7:9) = wb;
     
-    z = x(1);
+    pz = x(1);
     vz = x(2);
     qw = x(3);
     qv = x(4:6);
@@ -102,8 +102,7 @@ for ii=1:size(imu_a, 2)
     F_dx = eye(N-1) + A_dx*dt;
     
     % Covariance matrix
-    F_i = [zeros(1,7); eye(7)];
-    
+    F_i = [zeros(1,7); eye(7)];    
     
     Fi_i = noise_gyro^2*dt^2*eye(3);
     Om_i = noise_gyro_bias^2*dt*eye(3);
@@ -120,7 +119,7 @@ for ii=1:size(imu_a, 2)
         qv(1)    qw     qv(3)   qv(2); ...
         qw   -qv(1)    -qv(2)   qv(3)];
     H_x = [zeros(3, 2), H_x, zeros(3)];
-    X_dx = Qmat(x);
+    X_dx = Qmat(q);
     X_dx = blkdiag(eye(2), X_dx, eye(3));
     H_dx = H_x*X_dx;
     
@@ -135,16 +134,16 @@ for ii=1:size(imu_a, 2)
     S = eye(N-1) - K*H_dx;
     P = S*P*S' + K*Z*K';
     
-    % TODO: Here, check that the reset operation is really done that way,
-    % and not the other way round: leftq([1; dx])*q
-    % TODO: Check the reset operation with the accelerometer and implement
+    % TODO: Implement
     % the altitude correction using the range
     
     % Reset operation
-    x(1:4) = leftQuaternion(q)*[1; dx(3:5)/2];
-    x(5:7) = x(5:7) + dx(4:6);
+    x(1)   = pz + dx(1);
+    x(2)   = vz + dx(2);
+    x(3:6) = leftQuaternion(q)*[1; dx(3:5)/2];
+    x(7:9) = wb + dx(6:8);
     
-    dx = zeros(3,1);
+    dx = zeros(N-1,1);
     
     % Fill containers
     XX(:, ii+1) = x;
@@ -152,7 +151,7 @@ for ii=1:size(imu_a, 2)
     
 end
 
-[psi, theta, phi] = quat2angle(XX(1:4, :)');
+[psi, theta, phi] = quat2angle(XX(3:6, :)');
 [psiT, thetaT, phiT] = quat2angle(XT(7:10, :)');
 
 figure
