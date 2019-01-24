@@ -1,0 +1,18 @@
+// 1 column
+fx[0] = x[0] + dt*x[1];
+// 2 column
+fx[1] =  x[1] - dt*(g - _accels[2]*(x[2]*x[2] - x[3]*x[3] - x[4]*x[4] + x[5]*x[5]) + _accels[0]*(2*x[2]*x[4] - 2*x[3]*x[5]) - _accels[1]*(2*x[2]*x[3] + 2*x[4]*x[5]));
+// 3 column
+fx[2] =  x[2] + (dt*x[3]*(x[6] - _rates[0]))/2 + (dt*x[4]*(x[7] - _rates[1]))/2 + (dt*x[5]*(x[8] - _rates[2]))/2;
+// 4 column
+fx[3] =  x[3] - (dt*x[2]*(x[6] - _rates[0]))/2 - (dt*x[4]*(x[8] - _rates[2]))/2 + (dt*x[5]*(x[7] - _rates[1]))/2;
+// 5 column
+fx[4] =  x[4] - (dt*x[2]*(x[7] - _rates[1]))/2 + (dt*x[3]*(x[8] - _rates[2]))/2 - (dt*x[5]*(x[6] - _rates[0]))/2;
+// 6 column
+fx[5] =  x[5] - (dt*x[2]*(x[8] - _rates[2]))/2 - (dt*x[3]*(x[7] - _rates[1]))/2 + (dt*x[4]*(x[6] - _rates[0]))/2;
+// 7 column
+fx[6] =  x[6];
+// 8 column
+fx[7] =  x[7];
+// 9 column
+fx[8] =  x[8];
