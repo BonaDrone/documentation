@@ -8,7 +8,7 @@
 
 import serial
 import argparse
-from msppg import serialize_SET_PID_CONSTANTS, serialize_SET_POSITIONING_BOARD, serialize_SET_MOSQUITO_VERSION
+from msppg import serialize_SET_PID_CONSTANTS, serialize_SET_POSITIONING_BOARD, serialize_SET_MOSQUITO_VERSION, serialize_SET_RANGE_PARAMETERS
 
 PORT        = '/dev/ttyACM0'
 BAUDRATE    = 9600
@@ -19,7 +19,9 @@ parser = argparse.ArgumentParser(description='Mosquito parameter set via MSP')
 parser.add_argument('-m','--mosquito', type=int, action='store', help="Mosquito version (1->90, 0->150)")
 parser.add_argument('-p','--position', type=int, action='store', help="Positioning board present (1/0)")
 parser.add_argument('-c','--constants', type=tuple, action='store', help="Tuple containing PID constants",
-	 default=(0.06, 0.01, 0.00, 0.06, 0.01, 5.00, 0.3, 0.18, 0.18, 0.02, 0.05, 0.00, -1.00, -1.00, -1.00, -1.00))
+	 default=(0.06, 0.01, 0.00, 0.06, 0.01, 5.00, 0.3, 0.18, 0.18, 0.02, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00))
+parser.add_argument('-r','--range', type=tuple, action='store', help="Range calibration", default=(0.01, 0.02, 0.03))
+
 
 args = parser.parse_args()
 
@@ -66,7 +68,20 @@ def set_rate_pid(constants, serial_com, print_data = True):
 	if print_data:
 		print("Data to send: {}".format(data))
 
-def main(pos_board_param, mosquito_version_param, constants_param):
+def set_range_calibration(params, serial_com, print_data = True):
+	"""
+	Set the Mosquito's range calibration via an MSP message.
+	Parameters should be a tuple of 3 values. In order:
+	- rx (in meters)
+	- ry (in meters)
+	- rz (in meters)
+	"""
+	data = serialize_SET_RANGE_PARAMETERS(*params)
+	serial_com.write(data)
+	if print_data:
+		print("Data to send: {}".format(data))
+
+def main(pos_board_param, mosquito_version_param, constants_param, range_param):
 	"""
 	Connect with the Mosquito via Serial and send the parameters passed
 	as command line arguments
@@ -79,7 +94,8 @@ def main(pos_board_param, mosquito_version_param, constants_param):
 	if mosquito_version_param is not None:
 		set_mosquito_version(mosquito_version_param, serial_com)
 	set_rate_pid(constants_param, serial_com)
+	set_range_calibration(range_param, serial_com)
 
 
 if __name__ == '__main__':
-	main(args.position, args.mosquito, args.constants)
+	main(args.position, args.mosquito, args.constants, args.range)
