@@ -90,8 +90,7 @@ F_dx = eye(15) + A_dx*dt;
 
 R_t = transpose(fromqtoR(q));
 R_t_g = -R_t*gv;
-H_x = jacobian(R_t_g, q);
-H_x = blkdiag(zeros(6), H_x, zeros(6));
+H_x = jacobian(R_t_g, x);
 X_dx = Qmat(q);
 X_dx = blkdiag(eye(6), X_dx, eye(6));
 H_dx = H_x*X_dx;
