@@ -52,28 +52,9 @@ for ii=1:size(imu_a, 2)
     
     a = imu_a(:, ii);
     w = imu_w(:, ii);
-    
-    % Nominal Jacobian
-    pz = x(1);
-    vz = x(2);
-    qw = x(3);
-    qv = x(4:6);
-    wb = x(7:9);
-    q = [qw; qv];
-    
-%     W = 0.5*[0, -transpose(w - wb); (w - wb), -skew(w - wb)];
-%     Q = -0.5*Qmat(q);
-%     V = 2*[qw*a + cross(qv, a), qv*a' - a*qv' + a'*qv*eye(3) - qw*skew(a)];
-%     
-%     A_x = ...
-%         [0 1 zeros(1, N-2);...
-%         0 0 V(3, :) zeros(1,3);...
-%         zeros(4,2), W, Q; ...
-%         zeros(3, N)];
-%     
-%     F_x = eye(size(A_x,1)) + A_x*dt;
-%     
-%     x = F_x*x;
+    % -----------IMU integration--------------
+    % Nominal-State update
+    [p, v, q, ab, wb, qw, qv] = assignState(x);
     
     R = fromqtoR(q);
     aux    = R*a + [0;0;-gravity];
@@ -83,12 +64,7 @@ for ii=1:size(imu_a, 2)
     x(3:6) = leftQuaternion(q)*q_aux;
     x(7:9) = wb;
     
-    pz = x(1);
-    vz = x(2);
-    qw = x(3);
-    qv = x(4:6);
-    wb = x(7:9);
-    q = [qw; qv];
+    [p, v, q, ab, wb, qw, qv] = assignState(x);
     
     % Error-State Jacobian
     Fi = -skew(w-wb);
@@ -102,9 +78,9 @@ for ii=1:size(imu_a, 2)
     F_dx = eye(N-1) + A_dx*dt;
     
     % Covariance matrix
-    F_i = [zeros(1,7); eye(7)];    
+    F_i = [zeros(1,7); eye(7)];
     
-    Fi_i = noise_gyro^2*dt^2*eye(3);
+    Fi_i = noise_gyro^2*dt*eye(3);
     Om_i = noise_gyro_bias^2*dt*eye(3);
     a_i  = noise_accel_est^2*dt^2;
     Q_i  = blkdiag(a_i,Fi_i, Om_i);
@@ -114,7 +90,7 @@ for ii=1:size(imu_a, 2)
     
     % Correction Accelerometer
     
-    % Measurement Jacobiansx(1:4)
+    % Measurement Jacobians
     H_x = 2*[-qv(2)    qv(3)    -qw   qv(1); ...
         qv(1)    qw     qv(3)   qv(2); ...
         qw   -qv(1)    -qv(2)   qv(3)];
@@ -134,17 +110,34 @@ for ii=1:size(imu_a, 2)
     S = eye(N-1) - K*H_dx;
     P = S*P*S' + K*Z*K';
     
-    % TODO: Implement
-    % the altitude correction using the range
-    
     % Reset operation
     x(1)   = pz + dx(1);
     x(2)   = vz + dx(2);
     x(3:6) = leftQuaternion(q)*[1; dx(3:5)/2];
-    x(7:9) = wb + dx(6:8);
-    
+    x(7:9) = wb + dx(6:8);   
     dx = zeros(N-1,1);
     
+    % h(x) - Range Finder   
+%     R_r_i = eye(3);
+%     p_r_i = [rx; ry; rz]; % measure distances
+%     %p_r_i = [0; 0; 0]; % measure distances
+%     R = fromqtoR(q);
+%     
+%     p_r_w = [0; 0; pz] + R*p_r_i;
+%     R_r_w = R*R_r_i;
+    pz = x(1);
+    vz = x(2);
+    qw = x(3);
+    qv = x(4:6);
+    wb = x(7:9);
+    q = [qw; qv];
+
+    R = fromqtoR(q);
+    h_r = p_r_w(3)/R(3,3);
+    H_r = [0; 0; 1]*skew(R'*[]);
+    X_dx = Qmat(q);
+    X_dx = blkdiag(eye(2), X_dx, eye(3));
+    H_dx_r = H_r*X_dx;
     % Fill containers
     XX(:, ii+1) = x;
     PP(:, :, ii+1) = P;
