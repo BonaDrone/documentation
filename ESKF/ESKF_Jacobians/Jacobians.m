@@ -121,7 +121,7 @@ syms cx cy cz
 
 R = fromqtoR(q);
 
-R_c_i = [1 0 0; 0 1 0; 0 0 1]; % rotation from camera frame to imu frame
+R_c_i = [0 -1 0; 1 0 0; 0 0 1]; % rotation from camera frame to imu frame
 p_c_i = [cx; cy; cz];
 p_c_w = transpose(p) + R*p_c_i;
 R_c_w = R*R_c_i;
