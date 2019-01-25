@@ -7,29 +7,38 @@
 JACOBIAN = "Fx"
 
 SUBS = {
-	"dt" : "dt",
-	"qw" : "x[2]", # x[0-1] are positions and velocities
-	"qx" : "x[3]",
-	"qy" : "x[4]",
-	"qz" : "x[5]",
-	"wsx" : "_rates[0]",
+	"px": "x[0]", # states
+	"py": "x[1]",
+	"pz": "x[2]",
+	"vx": "x[3]",
+	"vy": "x[4]",
+	"vz": "x[5]",
+	"qw" : "x[6]", 
+	"qx" : "x[7]",
+	"qy" : "x[8]",
+	"qz" : "x[9]",
+	"abx" : "x[10]",
+	"aby" : "x[11]",
+	"abz" : "x[12]",
+	"wbx" : "x[13]",
+	"wby" : "x[14]",
+	"wbz" : "x[15]",
+	"wsx" : "_rates[0]", # IMU measurements
 	"wsy" : "_rates[1]",
 	"wsz" : "_rates[2]",
-	"asx" : "_accels[0]", # to be defined
+	"asx" : "_accels[0]", 
 	"asy" : "_accels[1]",
 	"asz" : "_accels[2]",
-	"wbx" : "x[6]",
-	"wby" : "x[7]",
-	"wbz" : "x[8]",
-	"abx" : "",
-	"aby" : "",
-	"abz" : "",
-	"g": "g",
-	"pz": "x[0]",
-	"vz": "x[1]",
-	"rx":"rx",
+	"dt" : "dt", # constants and parameters
+	"g": "9.8065",
+	"rx":"rx", # range parameters
 	"ry":"ry",
 	"rz":"rz",
+	"cx":"cx", # optical flow parameters
+	"cy":"cy",
+	"cz":"cz",
+	"fx":"fx",
+	"fy":"fy",
 }
 
 
