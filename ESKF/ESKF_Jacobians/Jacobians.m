@@ -47,11 +47,11 @@ F_x = x;
 R = fromqtoR(q);
 aux    = R*(as-ab) + [0;0;-g];
 q_aux  = [1;(ws-wb)*dt/2];
-F_x(1:3)   = p + v*dt;
-F_x(4:6)   = v + aux*dt;
-F_x(7:10) = leftQuaternion(q)*q_aux;
-F_x(11:13) = ab;
-F_x(14:16) = wb;
+F_x(1:3)   = p + v*dt;    % p <- p + v*dt
+F_x(4:6)   = v + aux*dt;  % v <- v + (R(as-ab)+g)dt
+F_x(7:10) = leftQuaternion(q)*q_aux; % q <- q x q((ws-wb)dt)
+F_x(11:13) = ab; % ab <- ab
+F_x(14:16) = wb; % wb <- wb
 
 %% Nominal Jacobian - obsolete
 % 
@@ -88,9 +88,9 @@ F_dx = eye(15) + A_dx*dt;
 
 %% h(x) - accel. Jacobian of h(x) w.r.t the quaternion
 
-R_t = transpose(fromqtoR(q));
-R_t_g = -R_t*gv;
-H_x = jacobian(R_t_g, x);
+R_t = fromqtoR(q).';
+h_a = R_t*gv;
+H_x = jacobian(h_a, x);
 X_dx = Qmat(q);
 X_dx = blkdiag(eye(6), X_dx, eye(6));
 H_dx = H_x*X_dx;
@@ -98,14 +98,17 @@ H_dx = H_x*X_dx;
 
 %% h(x) - Range Finder
 
-syms rx ry rz
+% syms rx ry rz
 
-R_r_i = eye(3);
-p_r_i = [rx; ry; rz]; % range parameters
+%R_r_i = eye(3);
+%p_r_i = [rx; ry; rz]; % range parameters
 R = fromqtoR(q);
+%p_r_w = p + R*p_r_i;
+%R_r_w = R*R_r_i;
 
-p_r_w = transpose(p) + R*p_r_i;
-R_r_w = R*R_r_i;
+p_r_w = p;
+R_r_w = R;
+
 % measurement model as a function of system states
 h_r = p_r_w(3)/R_r_w(3,3);
 % jacobian of measurement model
@@ -122,8 +125,9 @@ syms cx cy cz
 R = fromqtoR(q);
 
 R_c_i = [0 -1 0; 1 0 0; 0 0 1]; % rotation from camera frame to imu frame
-p_c_i = [cx; cy; cz];
-p_c_w = transpose(p) + R*p_c_i;
+%p_c_i = [cx; cy; cz];
+p_c_i = [0; 0; 0];
+p_c_w = p + R*p_c_i;
 R_c_w = R*R_c_i;
 
 P_f = [fx 0 0; 0 fy 0];
