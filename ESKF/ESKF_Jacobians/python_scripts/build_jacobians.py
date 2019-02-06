@@ -48,7 +48,7 @@ def main(input_file, output_file, jacobian_name = "Fx"):
 	# build jacobian in Hackflight format
 	for i in range(rows):
 		for j in range(cols):
-			jacobian[i][j] = jacobian_name+"["+str(i*rows+j)+"] = "+jacobian[i][j]+";\n"
+			jacobian[i][j] = jacobian_name+"["+str(i*cols+j)+"] = "+jacobian[i][j]+";\n"
 	# Write to a txt file:
 	with open(output_file, 'w') as file:
 		for j in range(cols):
