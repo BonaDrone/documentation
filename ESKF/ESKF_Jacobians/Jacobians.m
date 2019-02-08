@@ -100,14 +100,12 @@ H_dx = H_x*X_dx;
 
 % syms rx ry rz
 
-%R_r_i = eye(3);
-%p_r_i = [rx; ry; rz]; % range parameters
+R_r_i = [1 0 0; 0 -1 0; 0 0 -1];
 R = fromqtoR(q);
-%p_r_w = p + R*p_r_i;
-%R_r_w = R*R_r_i;
-
-p_r_w = p;
-R_r_w = R;
+p_r_w = -p; % Assume range and imu at same position (no offset).
+            % The minus sign is because we want the measure to be
+            % from drone to ground and not otherwise.
+R_r_w = R*R_r_i;
 
 % measurement model as a function of system states
 h_r = p_r_w(3)/R_r_w(3,3);
@@ -120,25 +118,27 @@ H_dx_r = H_r*X_dx;
 %% h(x) - Optical Flow
 
 syms fx fy % camera's focal distances
-syms cx cy cz
-
-R = fromqtoR(q);
-
-R_c_i = [0 -1 0; 1 0 0; 0 0 1]; % rotation from camera frame to imu frame
-%p_c_i = [cx; cy; cz];
-p_c_i = [0; 0; 0];
-p_c_w = p + R*p_c_i;
-R_c_w = R*R_c_i;
 
 P_f = [fx 0 0; 0 fy 0];
 P_x = [0 fx 0; -fy 0 0];
 
-v_c_c = transpose(R_c_i)*(transpose(R)*v+cross((ws-wb),p_c_i));
-w_c_c = transpose(R_c_i)*(ws-wb);
+Rz = [0 -1 0; 1 0 0; 0 0 1];
+Ry = [-1 0 0; 0 1 0; 0 0 -1];
+
+R_c_i = Rz*Ry;
+
+R = fromqtoR(q);
+
+p_c_w = -p;
+v_c_w = v;
+R_c_w = R*R_c_i;
+
+v_c_c = R_c_i.'*R.'*v_c_w;
+w_c_c = R_c_i.'*(ws-wb);
 z_c = p_c_w(3)/R_c_w(3,3);
 
 % measurement model as a function of system states
-h_c = -P_f*v_c_c/z_c + P_x*w_c_c;
+h_c = -P_f*(v_c_c/z_c) + P_x*w_c_c;
 % jacobian of measurement model
 H_c = jacobian(h_c, x);
 X_dx = Qmat(q);
