@@ -1,0 +1,1 @@
+[(fx*(vx*(qw^2 + qx^2 - qy^2 - qz^2) + vy*(2*qw*qz + 2*qx*qy) - vz*(2*qw*qy - 2*qx*qz))*(qw^2 - qx^2 - qy^2 + qz^2))/pz - fx*(wby - wsy), - fy*(wbx - wsx) - (fy*(vy*(qw^2 - qx^2 + qy^2 - qz^2) - vx*(2*qw*qz - 2*qx*qy) + vz*(2*qw*qx + 2*qy*qz))*(qw^2 - qx^2 - qy^2 + qz^2))/pz]
