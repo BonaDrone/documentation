@@ -125,11 +125,11 @@ P_x = [0 fx 0; -fy 0 0];
 Rz = [0 -1 0; 1 0 0; 0 0 1];
 Ry = [-1 0 0; 0 1 0; 0 0 -1];
 
-R_c_i = Rz*Ry;
-
+%R_c_i = Rz*Ry;
+R_c_i = diag([1 -1 -1]);
 R = fromqtoR(q);
 
-p_c_w = -p;
+p_c_w = p;
 v_c_w = v;
 R_c_w = R*R_c_i;
 
@@ -138,7 +138,7 @@ w_c_c = R_c_i.'*(ws-wb);
 z_c = p_c_w(3)/R_c_w(3,3);
 
 % measurement model as a function of system states
-h_c = -P_f*(v_c_c/z_c) + P_x*w_c_c;
+h_c = -P_f*(v_c_c/z_c) - P_x*w_c_c;
 % jacobian of measurement model
 H_c = jacobian(h_c, x);
 X_dx = Qmat(q);
