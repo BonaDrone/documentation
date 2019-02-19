@@ -29,7 +29,7 @@ def set_positioning_board(has_positioning_board, serial_com, print_data = True):
 	Set if the Mosquito has the positoning board (1 if True and 0 if False)
 	and send it to the Mosquito via an MSP message
 	"""
-	data = serialize_SET_POSITIONING_BOARD(has_positioning_board);
+	data = serialize_SET_POSITIONING_BOARD(has_positioning_board)
 	serial_com.write(data)
 	if print_data:
 		print("Data to send: {}".format(data))
@@ -39,7 +39,7 @@ def set_mosquito_version(mosquito_version, serial_com, print_data = True):
 	Set the version of the Mosquito (90 if mosquito_version is 1 and 150 if
 	mosquito version is 0) and send it to the Mosquito via an MSP message
 	"""
-	data = serialize_SET_MOSQUITO_VERSION(mosquito_version);
+	data = serialize_SET_MOSQUITO_VERSION(mosquito_version)
 	serial_com.write(data)
 	if print_data:
 		print("Data to send: {}".format(data))
