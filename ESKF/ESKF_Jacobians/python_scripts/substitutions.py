@@ -31,17 +31,9 @@ SUBS = {
 	"asz" : "_accels[2]",
 	"dt" : "dt", # constants and parameters
 	"g": "9.80665",
-	"rx":"_rx", # range parameters
-	"ry":"_ry",
-	"rz":"_rz",
-	"cx":"_cx", # optical flow parameters
-	"cy":"_cy",
-	"cz":"_cz",
 	"fx":"_fx",
 	"fy":"_fy",
-	"npix":"Npix",
-	"thetapix":"thetapix",
-	"omega_factor_b":"omegaFactor",
+	"f": "f",
 }
 
 
