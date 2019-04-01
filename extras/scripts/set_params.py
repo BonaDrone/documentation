@@ -13,35 +13,32 @@ from msppg import serialize_SET_PID_CONSTANTS, serialize_SET_POSITIONING_BOARD, 
 PORT        = '/dev/ttyACM0'
 BAUDRATE    = 9600
 
-# Default PID values
-RATE_ROLL_P = 0.05
-RATE_ROLL_I = 0.40
-RATE_ROLL_D = 0.0001
 
-RATE_PITCH_P = 0.05
-RATE_PITCH_I = 0.55
-RATE_PITCH_D = 0.0001
+RATE_ROLL_P = 0.045
+RATE_ROLL_I = 0.23
+RATE_ROLL_D = 0.00
 
-RATE_YAW_P = 0.05
-RATE_YAW_I = 0.40
+RATE_PITCH_P = 0.045
+RATE_PITCH_I = 0.23
+RATE_PITCH_D = 0.00
 
-RATE_D2R = 6.00
+RATE_YAW_P = 0.04
+RATE_YAW_I = 0.20
 
-LEVEL_P = 1.00
+RATE_D2R = 5.00
 
-ALTH_P = 0.0
-ALTH_V_P = 0.0
-ALTH_V_I = 0.0
-ALTH_V_D = 0.0
-ALTH_MIN_A = 0.0
+LEVEL_P = 0.80
 
-PARAM_6 = 1.0
-PARAM_7 = 2.0
-PARAM_8 = 3.0
+ALTH_P = 0.45
+ALTH_V_P = 0.18
+ALTH_V_I = 0.04
+ALTH_V_D = 0.00
+ALTH_MIN_A = 0.05
+
+POSH_V_P = 0.05
+POSH_V_I = 0.04
+POSH_V_D = 0.00
 PARAM_9 = 4.0
-
-
-
 
 # Command line arguments
 parser = argparse.ArgumentParser(description='Mosquito parameter set via MSP')
@@ -49,7 +46,7 @@ parser = argparse.ArgumentParser(description='Mosquito parameter set via MSP')
 parser.add_argument('-m','--mosquito', type=int, action='store', help="Mosquito version (1->90, 0->150)")
 parser.add_argument('-p','--position', type=int, action='store', help="Positioning board present (1/0)")
 parser.add_argument('-c','--constants', type=tuple, action='store', help="Tuple containing PID constants",
-	 default=(RATE_ROLL_P, RATE_ROLL_I, RATE_ROLL_D, RATE_YAW_P, RATE_YAW_I, RATE_D2R, LEVEL_P, ALTH_P, ALTH_V_P, ALTH_V_I, ALTH_V_D, ALTH_MIN_A, PARAM_6, PARAM_7, PARAM_8, PARAM_9))
+	 default=(RATE_ROLL_P, RATE_ROLL_I, RATE_ROLL_D, RATE_PITCH_P, RATE_PITCH_I, RATE_PITCH_D, RATE_YAW_P, RATE_YAW_I, RATE_D2R, LEVEL_P, ALTH_P, ALTH_V_P, ALTH_V_I, ALTH_V_D, ALTH_MIN_A, POSH_V_P, POSH_V_I, POSH_V_D, PARAM_9))
 
 args = parser.parse_args()
 
