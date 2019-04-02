@@ -29,8 +29,8 @@ RATE_D2R = 5.00
 
 LEVEL_P = 0.80
 
-ALTH_P = 0.40
-ALTH_V_P = 0.18
+ALTH_P = 0.41
+ALTH_V_P = 0.19
 ALTH_V_I = 0.04
 ALTH_V_D = 0.00
 ALTH_MIN_A = 0.05
@@ -124,11 +124,12 @@ def main(pos_board_param, mosquito_version_param, constants_param):
 	print("		* Roll: Kp: " + constants_param[9])
 	print("		* Pitch: Kp: " + constants_param[9])
 	print("	* Altitude Hold: ")
+	print("		* Minimum altitude: " + constants_param[14])
 	print("		* Position: Kp: " + constants_param[10])
 	print("		* Velocity: Kp: " + constants_param[11] + ", Ki: " + constants_param[12] + ", Kd: " + constants_param[13])
 	print("	* Position Hold: ")
 	print("		* Position: Kp: " + constants_param[17])
-	print("		* Velocity: Kp: " + constants_param[14] + ", Ki: " + constants_param[15] + ", Kd: " + constants_param[16])
+	print("		* Velocity: Kp: " + constants_param[15] + ", Ki: " + constants_param[16] + ", Kd: " + constants_param[17])
 
 if __name__ == '__main__':
 	main(args.position, args.mosquito, args.constants)
