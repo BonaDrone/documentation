@@ -15,11 +15,11 @@ BAUDRATE    = 9600
 
 
 RATE_ROLL_P = 0.045
-RATE_ROLL_I = 0.23
+RATE_ROLL_I = 0.15
 RATE_ROLL_D = 0.00
 
 RATE_PITCH_P = 0.045
-RATE_PITCH_I = 0.23
+RATE_PITCH_I = 0.15
 RATE_PITCH_D = 0.00
 
 RATE_YAW_P = 0.04
@@ -29,14 +29,14 @@ RATE_D2R = 5.00
 
 LEVEL_P = 0.80
 
-ALTH_P = 0.45
+ALTH_P = 0.40
 ALTH_V_P = 0.18
 ALTH_V_I = 0.04
 ALTH_V_D = 0.00
 ALTH_MIN_A = 0.05
 
 POSH_V_P = 0.05
-POSH_V_I = 0.04
+POSH_V_I = 0.15
 POSH_V_D = 0.00
 PARAM_9 = 4.0
 
@@ -99,6 +99,8 @@ def main(pos_board_param, mosquito_version_param, constants_param):
 	as command line arguments
 	"""
 	# Serial communication object
+	m_version = ["150", "90"]
+	p_board = ["NO", "YES"] 
 	serial_com = serial.Serial(PORT, BAUDRATE)
 	# process arguments and send appropriate messages
 	if pos_board_param is not None:
@@ -106,6 +108,27 @@ def main(pos_board_param, mosquito_version_param, constants_param):
 	if mosquito_version_param is not None:
 		set_mosquito_version(mosquito_version_param, serial_com)
 	set_rate_pid(constants_param, serial_com)
+	# print configuration summary
+	constants_param = [str(i) for i in constants_param]
+	print("\n")
+	print("***** Configuration summary *****")
+	print("- Version: " + m_version[mosquito_version_param])
+	print("- Positioning board: " + p_board[pos_board_param])
+	print("- PID constants:")
+	print("	* Rate:")
+	print("		* Roll: Kp: " + constants_param[0] + ", Ki: " + constants_param[1] + ", Kd: " + constants_param[2])
+	print("		* Pitch: Kp: " + constants_param[3] + ", Ki: " + constants_param[4] + ", Kd: " + constants_param[5])
+	print("		* Yaw: Kp: " + constants_param[6] + ", Ki: " + constants_param[7] + ", Kd: 0.00")
+	print("		* demands to rate: " + constants_param[8])
+	print("	* Level: ")
+	print("		* Roll: Kp: " + constants_param[9])
+	print("		* Pitch: Kp: " + constants_param[9])
+	print("	* Altitude Hold: ")
+	print("		* Position: Kp: " + constants_param[10])
+	print("		* Velocity: Kp: " + constants_param[11] + ", Ki: " + constants_param[12] + ", Kd: " + constants_param[13])
+	print("	* Position Hold: ")
+	print("		* Position: Kp: " + constants_param[17])
+	print("		* Velocity: Kp: " + constants_param[14] + ", Ki: " + constants_param[15] + ", Kd: " + constants_param[16])
 
 if __name__ == '__main__':
 	main(args.position, args.mosquito, args.constants)
