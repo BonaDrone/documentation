@@ -80,7 +80,7 @@ def set_rate_pid(m90, serial_com, print_data = True):
 
 		RATE_D2R = 6.00
 
-		LEVEL_P = 1.0
+		LEVEL_P = 1.5
 
 		ALTH_P = 0.85
 		ALTH_V_P = 0.85
@@ -88,7 +88,7 @@ def set_rate_pid(m90, serial_com, print_data = True):
 		ALTH_V_D = 0.085
 		ALTH_MIN_A = 0.0
 
-		POSH_V_P = 0.1
+		POSH_V_P = 0.25
 		POSH_V_I = 0.15
 		POSH_V_D = 0.05
 		PARAM_9 = 4.0
