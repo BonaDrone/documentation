@@ -60,6 +60,9 @@ def set_rate_pid(m90, serial_com, print_data = True):
 	- altHoldVelI    (AltHold PID)
 	- altHoldVelD    (AltHold PID)
 	- minAltitude    (AltHold PID)
+	- posHoldVelP    (PosHold PID) 
+	- posHoldVelI    (PosHold PID) 
+	- posHoldVelD    (PosHold PID) 
 	"""
 
 	constants = None
@@ -138,9 +141,9 @@ def main(pos_board_param, mosquito_version_param):
 	Connect with the Mosquito via Serial and send the parameters passed
 	as command line arguments
 	"""
-	# Serial communication object
 	m_version = ["150", "90"]
-	p_board = ["NO", "YES"] 
+	p_board = ["NO", "YES"]
+	# Serial communication object
 	serial_com = serial.Serial(PORT, BAUDRATE)
 	# process arguments and send appropriate messages
 	if pos_board_param is not None:
@@ -148,6 +151,7 @@ def main(pos_board_param, mosquito_version_param):
 	if mosquito_version_param is not None:
 		set_mosquito_version(mosquito_version_param, serial_com)
 	constants_param = set_rate_pid(mosquito_version_param, serial_com)
+	
 	# print configuration summary
 	constants_param = [str(i) for i in constants_param]
 	print("\n")
