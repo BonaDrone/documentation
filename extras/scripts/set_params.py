@@ -66,13 +66,13 @@ def set_rate_pid(m90, serial_com, print_data = True):
 
 	if m90:
 		RATE_ROLL_P = 0.05
-		# RATE_ROLL_I = 0.40
-		RATE_ROLL_I = 0.10
+		RATE_ROLL_I = 0.40
+		# RATE_ROLL_I = 0.10
 		RATE_ROLL_D = 0.0001
 
 		RATE_PITCH_P = 0.05
-		# RATE_PITCH_I = 0.55
-		RATE_PITCH_I = 0.15
+		RATE_PITCH_I = 0.55
+		# RATE_PITCH_I = 0.15
 		RATE_PITCH_D = 0.0001
 
 		RATE_YAW_P = 0.05
@@ -80,7 +80,7 @@ def set_rate_pid(m90, serial_com, print_data = True):
 
 		RATE_D2R = 6.00
 
-		LEVEL_P = 1.5
+		LEVEL_P = 3.0
 
 		ALTH_P = 0.85
 		ALTH_V_P = 0.85
