@@ -1,6 +1,14 @@
 # Documentation
 Different bits of documentation to ease BonaDrone's developers life
 
+## Flash Access
+
+BonaDrone's Flight Controller (FC) is equipped with a Flash Memory that enables writing and reading to files. An example on how to write and read via an Arduino script can be found [here](https://github.com/kriswiner/Dragonfly/blob/master/SDIOCardReader/ReadWrite.ino).
+
+To enable write and read operations the compilation option `DOSFS SFLASH(QSPI)` should be enabled.
+
+Additionally, to be able to access the flash storage as a mass storage device and move files in a drag and drop manner, the compilation option USBType "Serial + Mass Storage" has to be selected.
+
 ## EEPROM Usage
 
 ### EEPROM Parameters
