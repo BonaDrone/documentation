@@ -7,7 +7,7 @@ BonaDrone's Flight Controller (FC) is equipped with a Flash Memory that enables 
 
 To enable write and read operations the compilation option `DOSFS SFLASH(QSPI)` should be enabled.
 
-Additionally, to be able to access the flash storage as a mass storage device and move files in a drag and drop manner, the compilation option USBType "Serial + Mass Storage" has to be selected. **Important Note**: From my personal experience (Ubuntu 18.04), if the script loaded into the board contains any `Serial.print` the Flash filesystem will not be accessible from the computer.
+Additionally, to be able to access the flash storage as a mass storage device and move files in a drag and drop manner, the compilation option USBType `"Serial + Mass Storage"` has to be selected. **Important Note**: From my personal experience (Ubuntu 18.04), if the script loaded into the board contains any `Serial.print` the Flash filesystem will not be accessible from the computer.
 
 ## EEPROM Usage
 
