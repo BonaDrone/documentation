@@ -1,6 +1,13 @@
 # Documentation
 Different bits of documentation to ease BonaDrone's developers life
 
+## Arduino IDE: freshly new install
+When compiling, it may occur the following error: 
+`fork/exec {HOME}/Arduino/hardware/grumpyoldpizza/stm32l4/tools/linux//dfu-suffix: no such file or directory
+Error compiling for board Dragonfly-L476RE.`
+
+The following command solves this issue: `sudo apt-get install libc6-i386`
+
 ## Flash Access
 
 BonaDrone's Flight Controller (FC) is equipped with a Flash Memory that enables writing and reading to files. An example on how to write and read via an Arduino script can be found [here](https://github.com/kriswiner/Dragonfly/blob/master/SDIOCardReader/ReadWrite.ino).
@@ -111,14 +118,6 @@ rc.setTrimYaw(-0.0384381f);
 **AltHold PID**
 ![AltHold PID](extras/althold-pid.png)
 Based on [iNav's AltHold PID](https://github.com/iNavFlight/inav/wiki/Developer-info)
-
-### Arduino IDE freshly new install
-When compiling, it may occur the following error: 
-`fork/exec {HOME}/Arduino/hardware/grumpyoldpizza/stm32l4/tools/linux//dfu-suffix: no such file or directory
-Error compiling for board Dragonfly-L476RE.`
-
-The following command solves this issue: `sudo apt-get install libc6-i386`
-
 
 ### Old
 ![Old control loop](extras/PID-modified.png)
